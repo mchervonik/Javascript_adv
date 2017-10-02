@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Id and classes</title>
+    <style>
+        .class1 {
+            color: red;
+        }
+        div.class1 {
+            color: blue;
+            font-size: 14px;
+            text-decoration: underline;
+        }
+        div + p {
+            color: green;
+            font-size: 12px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="class1" id="id1">Title</h1>
+    <div class="class1">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.  Minus voluptatem itaque quia nulla, enim a in molestiae veritatis quibusdam ullam repudiandae, unde consequuntur.</p>
+    </div>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.  Minus voluptatem itaque quia nulla, enim a in molestiae veritatis quibusdam ullam repudiandae, unde consequuntur.</p>
+    <input type='button' value='Correct CSS' onclick='changeCSS()'></input>
+    <script type="text/javascript">
+        function changeCSS(){
+            var elID = document.getElementById('id1');
+            elID.style.color = 'black';
+            var divP = document.querySelector('div + p');
+            divP.style.color = 'blue';
+            divP.style.fontSize = '14px';
+            var divClass1 = document.querySelector('div.class1');
+            divClass1.style.textDecoration = 'none';
+            var p = document.getElementsByTagName('p');
+            for (var i = p.length-1; i>=0;i--){
+                p[i].style.cssText += 'color: black;'
+            }
+            console.log(p[1].style.cssText);
+        }
+        
+    </script>
+</body>
+</html>

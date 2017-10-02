@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Homework</title>
+    <style type="text/css">
+    	#place{
+    		background-color: green;
+    		width: 50px;
+    		height: 25px;
+    		margin-bottom: 15px;
+    	}
+    	#count{
+    		color: white;
+    		margin-left: 5px;
+    	}
+    </style>
+</head>
+<body>
+<!--     Создайте счетчик секунд, который начинает отчет с 1 и заканчивается на 30, также добавьте кнопки который останавливают отчет, и запускают его заново и добавьте кнопку обнуляющую отчет. Также попробуйте изменить код так чтобы отчет начиналься с 30 и заканчивалься на 1. -->
+<div id='place'><p id='count'></p></div>
+<button id='start' type='button' onclick='Start()'>Старт</button>
+<button id='stop' type='button' disabled='disabled' onclick='Stop()'>Стоп</button>
+<button id='resume' type='button' disabled='disabled' onclick='Resume()'>Возобновить</button>
+<button id='reset' type='button' disabled='disabled' onclick='Reset()'>Обнулить</button>
+<button id='reverse' type='button' disabled='disabled' onclick='Reverse()'>Обратно</button>
+
+<script type="text/javascript">
+	var place = document.getElementById('count');
+	var tick;
+	var count = 0;
+	var rev = true;
+
+	function Start(){
+		if(count == 0){
+			Tick();
+			var enabled = ['stop','reset','reverse'];
+			var disabled = ['start'];
+			Enabled(enabled);
+			Disabled(disabled);
+		}
+	}
+
+	function Tick(){
+		
+		tick = setTimeout(Tick,1000);
+		RenderCount();
+		console.log(count);
+		if(rev){
+			count++;
+		}else{
+			count--
+		}
+	}
+		
+
+	function RenderCount(){
+		if (count <= 30 && count >= 0){
+			place.innerText = count;
+		}else{
+			Stop();
+		}
+	}
+
+	function Stop(){
+		clearTimeout(tick);
+		var enabled = ['resume'];
+		var disabled = ['stop'];
+		Enabled(enabled);
+		Disabled(disabled);
+	}
+
+	function Resume(){
+		if(count <= 0) {rev = true; count = 0}
+		else if(count >= 30) {rev = false; count = 30}
+		clearTimeout(tick);
+		Tick();
+		var disabled = ['resume'];
+		var enabled = ['stop'];
+		Enabled(enabled);
+		Disabled(disabled);
+	}
+
+	function Reset(){
+		clearTimeout(tick);
+		count = 0;
+		rev = true;
+		RenderCount();
+		var disabled = ['stop','reset','reverse'];
+		var enabled = ['start'];
+		Enabled(enabled);
+		Disabled(disabled);
+	}
+
+	function Reverse(){
+
+		if(rev===true && count != 0){
+			rev = false
+			count--;
+		}else{
+			rev = true;
+			count++;
+			}
+
+	}
+
+	function Disabled(arr_id){
+		for (var i = arr_id.length - 1; i >= 0; i--) {
+			var item = document.getElementById(arr_id[i]);
+			item.setAttribute('disabled','disabled');
+		}
+
+	}
+	function Enabled(arr_id){
+		for (var i = arr_id.length - 1; i >= 0; i--) {
+			var item = document.getElementById(arr_id[i]);
+			item.removeAttribute('disabled');
+		}
+
+	}
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,70 @@
+
+<!-- Доработайте пример, 005_thisExample.html, при наведении мыши к одному из блоков, цвет блока должен измениться, на уникальный, такой которого еще нету у существующих блоков. Также выведите в блок текстовое оповещение о информации цвета, который используется для фона данного блока. При попытке закрыть вкладку, придупредите пользователя о том что информация будет утеряна. Используйте window.onload.  -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ключевое слово this</title>
+    <style>
+        div {
+            background-color: rgb(0,255,0);
+            display: inline-block;
+            float: left;
+            height: 150px;
+            width: 150px;
+            margin: 10px;
+            font: 12px arial;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function(){
+            window.onbeforeunload = function(){
+                return('What');
+            }
+        }
+    </script>
+</head>
+<body>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <script>
+        var divArr = document.getElementsByTagName("div");
+        var colors = ['rgb(0, 255, 0)','rgb(255, 0, 0)','rgb(0, 0, 255)','rgb(255, 255, 0)','rgb(0, 255, 255)','rgb(255, 0, 255)'];
+        for (var i = 0; i < divArr.length; i++) {
+            divArr[i].onclick = function () {
+                var divColor = getColor();
+                if(divColor === 'rgb(0, 0, 255)'){
+                    this.style.color = 'white';
+                }else{
+                    this.style.color = 'black';
+                }
+                this.style.backgroundColor = divColor;
+                this.innerHTML = divColor;
+            };
+        };
+
+
+        function getColor(){
+            var tempArr = colors.slice();
+            var tempColor = '';
+            var index = 0;
+            for (var i = 0; i < divArr.length; i++) {
+                tempColor = getComputedStyle(divArr[i]).backgroundColor;
+                index = tempArr.indexOf(tempColor);
+                if(index > -1){
+                    tempArr.splice(index,1);
+                }
+            }
+            if(tempArr.length > 0){
+                return tempArr[0];
+            }else{
+                return 'rgb(0,0,0)';
+            }
+
+        }
+    </script>
+</script>
+</body>
+</html>

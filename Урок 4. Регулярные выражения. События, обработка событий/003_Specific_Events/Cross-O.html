@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Домашнее задание - Крестики-Нолики</title>
+    <style>
+        .row{
+            height: 70px;
+            width: 70px;
+            border: 1px solid black;
+        }
+        .column{
+            display: inline-block;
+            margin: 0;
+            float: left;
+
+        }
+        body{
+            margin: 0;
+        }
+
+    </style>
+</head>
+<body>
+    <div class='column'>
+        <div class='row column1 row1 diag1'></div>
+        <div class='row column1 row2'></div>
+        <div class='row column1 row3 diag2'></div>
+    </div>
+    <div class='column'>
+        <div class='row column2 row1'></div>
+        <div class='row column2 row2 diag1 diag2'></div>
+        <div class='row column2 row3'></div>
+    </div>
+    <div class='column'>
+        <div class='row column3 row1 diag2'></div>
+        <div class='row column3 row2 '></div>
+        <div class='row column3 row3 diag1'></div>
+    </div>
+
+    <button type="button" onclick='reset()'>Reset</button>
+
+
+<script type="text/javascript">
+    var spots = document.querySelectorAll('.row');
+    var definition = ['.column1','.column2','.column3','.row1','.row2','.row3','.diag1','.diag2'];
+    var mark = 'X';
+    var markedX = 'clickX';
+    var markedO = 'clickO';
+    for (var i = spots.length - 1; i >= 0; i--) {
+        spots[i].onclick = EventHandler;
+    }
+    
+    function EventHandler(){
+        var existXO = (this.classList.contains(markedO) || this.classList.contains(markedX));
+        if(mark === 'X' && !existXO){
+            this.classList.add(markedO);
+            mark = 'O';
+            this.innerHTML = mark;
+        }else if(mark === 'O' && !existXO){
+            this.classList.add(markedX);
+            mark = 'X';
+            this.innerHTML = mark;
+        }
+
+        for (var i = 0; i < definition.length; i++) {
+            var countX = 0;
+            var countO = 0;
+            var items = document.querySelectorAll(definition[i]);
+            for (var j = 0; j < items.length; j++) {
+                if(items[j].classList.contains(markedX)){
+                    countX++;
+                }else if(items[j].classList.contains(markedO)){
+                    countO++;
+                }
+            }
+            if(countX === 3 || countO === 3){
+                for (var k = 0; k < items.length; k++) {
+                    items[k].style.backgroundColor = 'green';
+                    unassign();
+                }
+            }
+        }
+    }
+
+    function unassign(){
+        for (var t = spots.length - 1; t >= 0; t--) {
+            spots[t].onclick = null;
+        }
+    }
+
+    function reset(){
+        var allrow = document.querySelectorAll('.row');
+        for (var m = allrow.length - 1; m >= 0; m--) {
+            allrow[m].classList.remove(markedX);
+            allrow[m].classList.remove(markedO);
+            allrow[m].innerHTML = null;
+            allrow[m].style.backgroundColor = null;
+            allrow[m].onclick = EventHandler;
+            mark = 'X';
+        }
+    }
+</script>
+</body>
+</html>

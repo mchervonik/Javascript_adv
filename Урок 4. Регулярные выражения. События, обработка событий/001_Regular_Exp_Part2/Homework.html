@@ -1,0 +1,191 @@
+<!-- Напишите регулярные выражения, которые будут выбирать 
+    индекс - 55535 - 5 numbers
+    ip адресс, пример 255.255.255.255
+    цены в долларах - $0.84, $2.84, $4
+    дата в виде - 30/12/2014 - день, месяц, год
+ -->
+
+ <!DOCTYPE html>
+ <html>
+ <head>
+ 	<title>RegExp_HomeWork</title>
+ 	<style type="text/css">
+ 		textarea{
+ 			width: 250px;
+ 			height:50px;
+ 			border: 1px solid black;
+ 		}
+ 		#examples{
+ 			display: inline-block;
+ 			position: relative;
+ 			float: left;
+ 			border: 1px solid black;
+ 			max-width: 400px;
+ 			background-color: #e6e6e6;
+ 			margin-left: 10px;
+ 			border-radius: 10px;
+ 			padding: 5px;
+ 			
+ 		}
+ 		#find{
+ 			width: 250px;
+ 			font: 13px courier;
+ 		}
+ 		#result{
+ 			max-width: 400px;
+ 			/*height: 100px;*/
+ 			border: 1px dotted red;
+ 			padding: 10px;
+ 			display: inline-block;
+ 			word-break: break-all;
+ 		}
+ 		.choose{
+ 			width: 300px;
+ 			height: 150px;
+ 			margin-top: 10px;
+ 		}
+ 		.choose > div{
+ 			font: 12px arial;
+ 			display: inline-block;
+ 			
+ 		}
+ 		#regexp_body{
+ 			border: 1px solid black;
+ 			padding: 10px;
+ 			width: 300px;
+ 			background-color: #e6e6e6;
+ 			border-radius: 10px;
+ 			position: relative;
+ 			display: inline-block;
+ 			float: left;
+ 		}
+
+ 	</style>
+ </head>
+ <body>
+ 	<div id='regexp_body'>
+
+	 	<p>Test RegExp</p>
+	 	<textarea id='text'></textarea>
+
+	 	<p>Write RegExp</p>
+	 	<input id='find' type="text" name="RegExp"/>
+	 	<button type="button" onclick="Find()">Find</button>
+
+	 	<div class='choose'>
+	 		<div><input type="checkbox" name='g'> g - Глобальный поиск</div>
+	 		<div><input type="checkbox" name='i'> i - Регистронезависимый шаблон</div>
+	 		<div><input type="checkbox" name='m'> m - Многострочный текст</div>
+	 		<div><input type="checkbox" name='s'> s - Считать текст одной строкой</div>
+	 		<div><input type="checkbox" name='x'> x - Разрешить комментарии и пробелы</div>
+	 		<div><input type="checkbox" name='e'> е - Выполнение подстановки</div>
+	 		<div><input type="checkbox" name='U'> U - Нежадный шаблон</div>
+	 	</div>
+
+	 	<p>Result</p>
+	 	<div id='result'>
+	 		<p id='regtext'><span style='color: red;'>RegExp: </span><span class='res'></span></p>
+	 		<p id='expr'><span style='color: red;'>Matched expressions: </span><span class='res'></span></p>
+	 		<p id='indexes'><span style='color: red;'>Matched indexes: </span><span class='res'></span></p>
+	 	</div>
+
+ 	</div>
+ 	<div id='examples'>
+ 		<p>EXAMPLES(click to apply)</p>
+ 		<ul>
+ 			<li><a href='#' onclick='applyExample("ip")'>Validate IP address</a></li>
+ 			<li><a href='#' onclick='applyExample("date1")'>Validate Date DD/MM/YYY[Y]</a></li>
+ 			<li><a href='#' onclick='applyExample("digits5")'>Validate 5 digits</a></li>
+ 			<li><a href='#' onclick='applyExample("dollars")'>Validate dollars</a></li>
+ 			
+ 		</ul>
+ 	</div>
+
+ 	<script type="text/javascript">
+
+
+
+ 		function applyExample(str){
+ 			var search = document.getElementById('find');
+ 			console.log(search);
+ 			switch(str){
+
+ 				case 'ip':
+ 					search.value = '(([0-1]?\\d\\d?|2[0-4]\\d|25[0-5])\\.){3}([01]?\\d\\d?|2[0-4]\\d|25[0-5])';
+ 					break;
+
+ 				case 'date1':
+ 					search.value = '(0?[1-9]|[1-2]\\d|3[0-1])\\/(0?[1-9]|1[0-2])\\/(\\d{1,4})';
+ 					break;
+
+ 				case 'digits5':
+ 					search.value = '(\\d{5})';
+ 					break;
+
+ 				case 'dollars':
+ 					search.value = '(\\$(0\\.\\d{1,2}|0|[1-9](\\d+)?(\\.\\d{2})?))';
+ 					break;
+
+ 				default:
+ 					search.value = '';
+ 			}
+ 			var gMod = document.querySelector('.choose > div > input[name="g"]');
+ 			gMod.checked = true;
+ 		}
+
+ 		function Find(){
+ 			var searchStr = document.getElementById('find').value;
+ 			var text = document.getElementById('text').value;
+ 			var mod = getModifier();
+ 			var g = new RegExp('g');
+ 			var reg = new RegExp(searchStr, mod);
+
+ 			var regtext = document.querySelector('#regtext > .res');
+ 			if(reg != '/(?:)/'){
+ 				regtext.innerHTML = null;
+ 				regtext.insertAdjacentText('beforeEnd',reg);
+ 			}else{regtext.innerHTML = null;}
+ 			
+ 			var matches = text.match(reg);
+ 			var expr = document.querySelector('#expr > .res');
+ 			if(matches !== null && matches[0] !== ''){				
+ 				expr.innerHTML = null;
+ 				expr.insertAdjacentText('beforeEnd',matches);
+ 			}else{
+ 				matches = 'not found';
+ 				expr.innerHTML = null;
+ 				expr.insertAdjacentText('beforeEnd',matches);
+ 				matches = null;
+ 			}
+ 			var ind = '';
+ 			if(g.test(mod)){
+ 				var items;
+ 				while(items = reg.exec(text)){
+ 					ind += '([pos:'+items.index+']'+' value: '+items[0]+')';
+ 				}
+ 				
+ 			}else if(matches !== null && matches[0] !== ''){
+ 				ind += '([pos:'+matches.index+']'+' value: '+matches[0]+')';
+ 			}
+
+ 			var indexes = document.querySelector('#indexes > .res');
+ 			indexes.innerHTML = null;
+ 			indexes.insertAdjacentText('beforeEnd',ind);
+
+ 		}
+
+ 		function getModifier(){
+ 			var mod = "";
+ 			var selectMod = document.querySelectorAll('.choose input');
+ 			for (var i = 0; i < selectMod.length; i++) {
+ 				if(selectMod[i].checked){
+ 					mod += selectMod[i].getAttribute('name');
+ 				}
+ 			}
+ 			return mod;
+ 		}
+ 	</script>
+ 
+ 
+ </body>
+ </html>
