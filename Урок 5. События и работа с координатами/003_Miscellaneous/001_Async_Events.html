@@ -7,7 +7,9 @@
     <script>
     window.onload = function () {
         var myFocus = document.getElementById("myfocus");
+
         var fakeFocus = document.getElementById("fakefocus");
+
 
         myFocus.addEventListener("focus", function (e) {
             console.log("focus");
@@ -19,11 +21,15 @@
             myFocus.focus();
             console.log("click after");
         });
+
+
     };
     </script>
 </head>
 <body>
-<input type="text" id="myfocus">
+    <input type="text" id="myfocus">
+
 <button id="fakefocus">Фокус</button>
+
 </body>
 </html>

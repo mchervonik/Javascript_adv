@@ -10,10 +10,10 @@
           if (menu) {
 
               menu.addEventListener ("click",  function(e) {
-                var target = e && e.target || event.srcElement;
+                var target = (e && e.target) || (window.element && window.event.srcElement);
                 var href = target.getAttribute('href');
 
-                if (target.tagName != 'a') {
+                if (target.tagName != 'A') {
                     return
                 }
                 alert(href);

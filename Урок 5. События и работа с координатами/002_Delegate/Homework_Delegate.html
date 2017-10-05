@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="UTF-8">
+    <title>Homework</title>
+    <style type="text/css">
+    	div{
+    		border: 2px solid red;
+    		margin-top: 5px;
+    		margin-bottom: 5px;
+    		padding: 5px;
+    		width: 150px;
+    	}
+    	.delete{
+    		margin: 5px;
+    	}
+    </style>
+    <script type="text/javascript">
+    	window.addEventListener('load',
+    		function(){
+    			var del = document.getElementsByClassName('delete');
+
+    			for (var i = del.length - 1; i >= 0; i--) {
+    			 	del[i].addEventListener('click', deleteHandler);
+    			}
+
+				function deleteHandler(e){
+					var target = (e && e.target) || (window.element && window.event.srcElement);
+					if(target.tagName !== 'BUTTON'){
+						return;
+					}
+					var parent = target.parentNode;
+					parent.style.display = 'none';
+				};
+    	});
+    </script>
+</head>
+<body>
+    <!-- Создайте 5 блоков с текстом. Добавьте в каждый из блоков кнопку для его удаления. Используйте только один обработчик. -->
+    <!-- Доработайте пример 004_Attr_Tech.html таким образом, чтобы при наведении на span элементы, подсказка сплыва под ними, а не в модальном окне. Используйте addEventListener -->
+    <div>
+    	<span>First div goes here</span><br>
+    	<button class='delete'>Del</button>
+    </div>
+     <div>
+    	<span>Second div goes here</span><br>
+    	<button class='delete'>Del</button>
+    </div>
+     <div>
+    	<span>Third div goes here</span><br>
+    	<button class='delete'>Del</button>
+    </div>
+     <div>
+    	<span>Fourth div goes here</span><br>
+    	<button class='delete'>Del</button>
+    </div>
+     <div>
+    	<span>Fifth div goes here</span><br>
+    	<button class='delete'>Del</button>
+    </div>
+    
+</body>
+</html>

@@ -4,23 +4,44 @@
   <meta charset="utf-8">
   <script>
     window.onload = function () {
-      var mainDiv = document.getElementById("main-div");
-      mainDiv.onmouseover = function (e) {
-        var target = e && e.target || window.event.srcElement;
-        var dataToggleId = target.getAttribute('data-tooltip');
-        if (!dataToggleId) {
-            return
-        };
-        alert(dataToggleId);
+      var mainDiv = document.querySelector('#main-div');
+      var tip = document.getElementById('tip');
+        mainDiv.addEventListener('mouseover', 
+          function (e) {
+            var target = e && e.target || window.event.srcElement;
+            var dataToggleId = target.getAttribute('data-tooltip');
+            if (!dataToggleId) {
+                return
+            };
+            tip.innerHTML = dataToggleId;
+        });
     };
-};
 </script>
+<style type="text/css">
+  #tip{
+    border: 1px solid black;
+    padding: 5px;
+    margin-top: 10px;
+    width: 200px;
+    color: red;
+  }
+  #main-div{
+    border: 1px solid blue;
+    padding: 5px;
+    margin-top: 10px;
+    width: 300px;
+    color: blue;
+  }
+</style>
 </head>
 <body>
   <div id="main-div">
     <span data-tooltip="наведите">наведите</span> 
     <span data-tooltip="для">для</span> 
     <span data-tooltip="подсказки">подсказки</span>
+</div>
+<div id='tip'>
+  
 </div>
 </body>
 </html>

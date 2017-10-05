@@ -44,6 +44,7 @@
         var flagForPhase = false; // Target
         
         divParent.addEventListener("click", function (e) {
+            e.stopPropagation();
             alert("parent");
             this.style.backgroundColor = "brown";
         }, flagForPhase);

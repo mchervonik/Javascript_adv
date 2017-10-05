@@ -1,0 +1,46 @@
+<!--
+Создайте ссылку и див с текстом внутри, который изначально при загрузке страницы будет скрыт. При клике на ссылку див пропадает, если повторно нажать ссылку див и текст должны вернуться. Также создайте кнопку, которая будет отменять выполнение обработчика клика по ссылке.
+ -->
+ <!DOCTYPE html>
+ <html>
+ <head>
+ 	<title>Switching</title>
+ 	<style type="text/css">
+ 		#div{
+ 			border: 1px solid red;
+ 			padding: 10px;
+ 			margin: 10px;
+ 			display: none;
+ 		}
+ 	</style>
+ 	<script type="text/javascript">
+ 		
+ 		window.addEventListener('load',
+ 			function(){
+ 				var a = document.getElementById('ref');
+ 				var div = document.getElementById('div');
+ 				var btn = document.getElementById('button');
+ 				a.addEventListener('click', clickHandler);
+ 				function clickHandler(){
+					var dsp = getComputedStyle(div).display;
+					if(dsp === 'none'){
+						div.style.display = 'block';
+					}else{
+						div.style.display = 'none';
+					}
+ 				};
+ 				btn.addEventListener('click',
+ 					function(){
+ 						a.removeEventListener('click',clickHandler);
+ 					});
+
+ 			});
+ 	</script>
+ </head>
+ <body>
+ 	<a id='ref' href=#>Включить текст</a>
+ 	<div id='div' >Some test goes here</div>
+ 	<button id='button'>Stop switching</button>
+ 
+ </body>
+ </html>
