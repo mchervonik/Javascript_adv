@@ -6,31 +6,68 @@
 <head>
     <meta charset="UTF-8">
     <title>Координаты</title>
+    <script type="text/javascript">
+        window.addEventListener('load', 
+            function(){
+                var body = document.querySelector('body');
+                var client = document.querySelector('#clientXY');
+                var page = document.querySelector('#pageXY');
+                var offset = document.querySelector('#offsetXY');
+                var drag = document.querySelector('#draggable');
+
+
+                window.addEventListener('click', clickBodyHandler);
+
+                function clickBodyHandler(e){
+                    client.value = "clientX: "+e.clientX+". clientY: "+e.clientY;
+                    page.value = "pageX: "+e.pageX+". pageY: "+e.pageY;
+                    offset.value = "pageXOffset: "+window.pageXOffset+". pageYOffset: "+window.pageYOffset
+
+                    drag.style.top = (e.pageY - 10)+'px';
+                    drag.style.left =(e.pageX - 10)+'px';
+                }
+
+            });
+    </script>
+    <style type="text/css">
+        body{
+            height: 1500px;
+            width: 1500px;
+            margin:0;
+        }
+        #container{
+            position: fixed;
+            margin-top: 20px;
+        }
+        div{
+            margin: 5px;
+        }
+        #draggable{
+            position: relative;
+            top: 200px;
+            left: 10px;
+            height: 15px;
+            width: 15px;
+            background-color: green;
+            /*z-index: -5;*/
+            border-radius: 50%;
+        }
+        input{
+            width: 250px;
+            color: red;
+        }
+        span{
+            color:black;
+        }
+    </style>
 </head>
 <body>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/><br/>
-    <br/><br/><br/>
-    <br/><br/><br/><br/>
-        <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/><br/>
-    <br/><br/><br/>
-    <input onmousemove="this.value = event.clientX+':'+event.clientY"><br/>
-    <input id="second" onmousemove="this.value = event.pageX+':'+event.pageY">
-    <br/><br/>
-    <br/><br/><br/>
-    <br/><br/><br/><br/>
-    <br/><br/><br/><br/><br/>
-    <br/><br/><br/><br/><br/><br/>
-    <br/><br/><br/><br/><br/><br/><br/>
-    <br/><br/><br/><br/><br/><br/><br/><br/>
-    <br/><br/><br/><br/><br/><br/><br/><br/><br/>
-    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+    <div id='container'>
+        <span>Click on the screen to observe position of element</span>
+        <div><span>clientXY </span><br><input id='clientXY'></div>
+        <div><span>pageXY </span><br><input id='pageXY'></div>
+        <div><span>pageXYOffset </span><br><input id='offsetXY'></div>
+    </div>
+    <div id='draggable'></div>
 </body>
 </html>

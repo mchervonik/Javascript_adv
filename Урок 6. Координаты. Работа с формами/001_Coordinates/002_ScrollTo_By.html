@@ -26,12 +26,12 @@
         function clickHandler() {
     // Метод scrollBy(x,y) прокручивает страницу относительно текущих координат.
             window.scrollBy(300, 100);
-            alert("pageXOffset: " + document.pageXOffset + ", pageYOffset: " + document.pageYOffset);
+            alert("pageXOffset: " + window.pageXOffset + ", pageYOffset: " + window.pageYOffset);
     // Метод scrollTo(pageX,pageY) прокручивает страницу к указанным координатам относительно документа
         };
         function scrollToTop () {
             window.scrollTo(0, 0);
-            console.log("pageXOffset: " + document.pageXOffset + ", pageYOffset: " + document.pageYOffset);
+            console.log("pageXOffset: " + window.pageXOffset + ", pageYOffset: " + window.pageYOffset);
         }
     </script>
 </body>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="UTF-8">
+    <title>HomeWork</title>
+</head>
+<script type="text/javascript">
+	window.addEventListener('load', 
+		function(){
+			var circle = document.getElementById('moveable');
+			var btn = document.getElementById('btn');
+			var body = document.querySelector('body')
+			circle.addEventListener('click', circleClickHandler);
+			btn.addEventListener('click', stopMoveCircle);
+			var move;
+
+			function circleClickHandler(e){
+				var cleft = e.target.getBoundingClientRect().left;
+				var ctop = e.target.getBoundingClientRect().top;
+				move = setInterval(
+					function(){
+						cleft += 1;
+						if(body.offsetWidth < (cleft+circle.offsetWidth)){
+							cleft = 0;
+							ctop += 80; 
+						}
+						if(300 < ctop){
+							cleft = 0;
+							ctop = 10;
+						}
+						circle.style.left = cleft+'px';
+						circle.style.top = ctop+'px';
+					},20);
+				
+			}
+
+			function stopMoveCircle(){
+				clearInterval(move);
+			}
+
+		});
+</script>
+<style type="text/css">
+	#moveable{
+		position: relative;
+		top: 10px;
+		height: 100px;
+		width: 100px;
+		border-radius: 50%;
+		background-color: white;
+
+	}
+	body{
+		margin: 0;
+		background-color: red;
+	}
+	#btn{
+		position: relative;
+		top: 20px;
+		left: 30px;
+	}
+	#text{
+		position: relative;
+		font-size: 35px;
+		top: -60px;
+		color: red;
+		padding-left: 5px;
+	}
+</style>
+<body>
+    <!-- back to top button; -->
+    <!-- drag; -->
+    <!-- создайте div, при клике на него, div начинает двигаться вправо, при клике на кнопку - останавливается, при попадании div к краю окна, он переходит к началу окна. -->
+    <div id='moveable'></div>
+    <div id='text'>It is continuously moving across this red body until the end of offsetWidth<br><br>It is continuously moving across this red body until the end of offsetWidth<br><br> It is continuously moving across this red body until the end of offsetWidth<br><br> It is continuously moving across this red body until the end of offsetWidth<br><br> It is continuously moving across this red body until the end of offsetWidth<br><br> It is continuously moving across this red body until the end of offsetWidth</div>
+    <button id='btn'>Stop</button>
+</body>
+</html>
