@@ -1,1 +1,51 @@
 <!-- Реализуйте последний 2 слайда в презентации с помощью пройденого на уроке материала -->
+<!DOCTYPE html>
+<html>
+<head>
+	<title>OOP</title>
+	<script type="text/javascript">
+		window.addEventListener('load', 
+			function(){
+
+				function Doctor(){
+					this.walk = function(){
+						alert('walk');
+					}
+					this.eat = function(){
+						alert('eat');
+					}
+					this.drink = function(){
+						alert('drink');
+					}
+					this.cure = function(){
+						alert('cure');
+					}
+				}
+
+				function Dentist(){
+					this.cure = function(){
+						alert('Treat teeth');
+					}
+				}
+
+				function Surgeon(){
+					this.cure = function(){
+						alert('perform operation')
+					}
+				}
+
+				Dentist.prototype = new Doctor();
+				Surgeon.prototype = new Doctor();
+				var d = new Doctor();
+				var s = new Surgeon();
+				var den = new Dentist();
+				s.walk();
+				s.eat();
+				s.cure();
+			});
+	</script>
+</head>
+<body>
+
+</body>
+</html>

@@ -18,13 +18,17 @@
         // ---- класс наследник ----
 
         function Bird(name, walkSpeed) {
-            this.name = name;
-            this.walkSpeed = walkSpeed;
+            Animal.apply(this,arguments);
+            this.move = function(){
+                alert('it flies');
+            }
         };
 
         function Predator(name, walkSpeed) {
-            this.name = name;
-            this.walkSpeed = walkSpeed;
+            Animal.apply(this,arguments);
+            this.move = function(){
+                alert('it run');
+            }
         };
 
         Bird.prototype = new Animal();
@@ -32,9 +36,11 @@
 
         var bird = new Bird("Owl", 50);
         var wolf = new Predator("Wolf", 70);
-
+        console.log(bird);
         bird.showInfo();
+        bird.move();
         wolf.showInfo();
+        wolf.move();
 
 </script>
 </head>

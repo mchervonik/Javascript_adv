@@ -1,3 +1,33 @@
 <!-- Создайте функцию, которая возвращает день недели для даты. -->
 
 <!-- День нужно возвратить в формате - понедельник имеет номер 1, вторник номер 2, …, воскресенье - номер 7. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DateTime</title>
+    <script>
+        var date = +new Date();
+        var date1 = Date.now();
+
+        function getDayNumber(date){
+        	var day = date.getDay();
+        	if (day === 0) { return 7 }
+        	else{ return day}
+
+        }
+
+    console.log(date);
+    	
+
+    console.log(date1);
+    console.log(getDayNumber(date1));
+	
+    </script>
+
+</head>
+<body>
+    
+</body>
+</html>

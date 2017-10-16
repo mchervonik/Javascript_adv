@@ -5,10 +5,33 @@
     <meta charset="UTF-8">
     <title>Homework</title>
     <script>
+    	window.addEventListener('load',
+    		function(){
+    			var spot = document.querySelector('#spot');
+    			var login = prompt('Enter your login');
+    			var passwd = encodeURIComponent(prompt('Enter your password'));
+
+    			if(window.localStorage.getItem(login) == undefined){
+    				window.localStorage.setItem(login,passwd);
+    				alert('Welcome, '+login+' to our site');
+    				spot.innerHTML = login;
+    			}else{
+    				if(window.localStorage.getItem(login) == passwd){
+    					alert('Welcome back, '+login);
+    					spot.innerHTML = login;
+    				}else{
+    					alert('This Login is busy');
+    					location.reload();
+    				}
+    			}
+    			
+    		});
        
     </script>
 </head>
 <body>
+	<p id='message'>User <span id='spot' style='color:red;'></span> is logged in</p>
+	<button id='exit' onclick='location.reload();'>Exit</button>
 
 </body>
 </html>

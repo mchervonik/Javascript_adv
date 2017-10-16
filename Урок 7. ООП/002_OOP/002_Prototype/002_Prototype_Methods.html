@@ -10,7 +10,7 @@
             this.age = age;
             this.eyeColor = eye;
             this.nationalityChecker = function () {
-                document.write("My nationality is" + this.nationality + "<br />"); 
+                document.write("My nationality is " + this.nationality + "<br />"); 
             };
         };
         
@@ -20,12 +20,14 @@
 
         myFather.nationalityChecker();
 
+        Person.prototype.nationality = "Romanian";
+
         var myMother = new Person("Irina", "Ivanova", 51, "green");
         myMother.nationalityChecker();
     
         var mySister = new Person("Irina", "Ivanova", 21, "green");
         console.log(myFather,myMother, mySister );
-        document.write(myFather);
+        //document.write(myFather);
         //нам не нужен метод myMother.nationalityChecker(), а он есть
 
     </script>
